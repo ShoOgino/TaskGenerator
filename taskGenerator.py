@@ -5,14 +5,13 @@ import csv
 import copy
 from dateutil.relativedelta import relativedelta
 import argparse
+import os
 
-metadata = {}
+
+idsCommitRelease = {}
 
 #  cassandra
-metadata["cassandra"] = {}
-metadata["cassandra"]["pathRepositoryFile"] = r"C:\Users\login\data\workspace\MLTool\datasets\cassandra\repositoryFile"
-metadata["cassandra"]["pathRepositoryMethod"] = r"C:\Users\login\data\workspace\MLTool\datasets\cassandra\repositoryMethod"
-metadata["cassandra"]["releaseIDs"] = [
+idsCommitRelease["cassandra"] = [
     "1f91e99223b0d1b7ed8390400d4a06ac08e4aa85",
 
     "533193a7b82c98814567c735f13a0e33c58424b1",
@@ -22,31 +21,8 @@ metadata["cassandra"]["releaseIDs"] = [
     "e848d47ed171f20ccd8cf5e20d9e188ede85c17c"
 ]
 
-# checkstyle
-metadata["checkstyle"] = {}
-metadata["checkstyle"]["pathRepositoryFile"] = r"C:\Users\login\data\workspace\MLTool\datasets\checkstyle\repositoryFile"
-metadata["checkstyle"]["pathRepositoryMethod"] = r"C:\Users\login\data\workspace\MLTool\datasets\checkstyle\repositoryMethod"
-metadata["checkstyle"]["releaseIDs"] = [
-    "5f53a2a380e038e791af244b42f245b813dbc379",
-
-    None,
-    "9acdd1b97e561748ae8cc61e11dcc145885ecb6d",
-    "cbcc08934f6e1687d55a1174905f7ce95a3ab2c4",
-    "00af541f485656d25ceb07e206e82af35847b77a",
-    "f31928524128c0909347456ef33105e63ee59824",
-    "a780f92fe771d1c062408633eb06453e674b2f2e",
-    "635139a14f3db6da443764c62d9c93af0a4e2cd7",
-    "f45f6b1917b18d5d5151da5d3f74335934b93d72",
-
-    "8326f7bc6af02b2303b0dc136323e129893da705"
-]
-
-
 #  egit
-metadata["egit"] = {}
-metadata["egit"]["pathRepositoryFile"] = r"C:\Users\login\data\workspace\MLTool\datasets\egit\repositoryFile"
-metadata["egit"]["pathRepositoryMethod"] = r"C:\Users\login\data\workspace\MLTool\datasets\egit\repositoryMethod"
-metadata["egit"]["releaseIDs"] = [
+idsCommitRelease["egit"] = [
     "dfbdc456d8645fc0c310b5e15cf8d25d8ff7f84b",
 
     "3104c7a3af566617c32172f956eb57d0b135d3bf",
@@ -58,51 +34,9 @@ metadata["egit"]["releaseIDs"] = [
     "08c530ec099610334a4794f7fe7ed33cc619ef4f"
 ]
 
-# geotools
-metadata["geotools"] = {}
-metadata["geotools"]["pathRepositoryMethod"] = r"C:\Users\login\data\workspace\MLTool\datasets\geotools\repositoryMethod"
-metadata["geotools"]["pathRepositoryFile"] = r"C:\Users\login\data\workspace\MLTool\datasets\geotools\repositoryFile"
-metadata["geotools"]["releaseIDs"] = [
-    "84d6dc79f544430bdb6bdec7fa3a7fb89bb65229",
-
-    None,
-    None,
-    None,
-    None,
-    None,
-    None,
-    None,
-    "fddfd9bed8fbea87479602df7643ab44298723da",
-    "cd6a0ac13e0ccd9ed3df653e1d7ca640a80ed86d",
-    "115fd1004418702455df7bae10e90f7c14d8fa64",
-
-    "45103e4ea4505d38404ddf0ab0c8d67cdac4f3cb",
-    "645963cd65a6f5c151722ce012f2a4a6d3b86a44",
-    "3e400364d95c06a3e449c34dbc3c587a12bbdfb6",
-    "19819635d08697eaf28356e0fa8d084c77143387",
-    "d18ecd3d875a9136f2644b29d1f28f7ec67a06db",
-    "ae16e116c58d9f4bc3fcec2566fca3dd8dd92120",
-    "cf34347a4544cac900c09f2e5de4c5fb138c8637",
-    "91315ffe07add4d70567a36802e5813e9cc75fa0",
-    "92b83e521e75c852e3c072fccce0200c9bd2fcde",
-    "ffc271f317c04e714ea44a4879dd4601bd723d5e",
-
-    "90b0c1c482733f6914bbf10aad19e78824634a69",
-    "2f654c50828efc8f42b23e1363a25fafd4444de3",
-    "e4e8e203d1612d8d9b14bdace757d0bd79163be2",
-    "81c98ca8040abb325a17c85950645ce89bd93088",
-    "d187663948b47212514991a71c0fc3021908b034",
-
-    "81e3f91bb97fd2a8a7b4b2609aba40c9ba8ab9ae"
-]
-
-
 
 #   jgit
-metadata["jgit"] = {}
-metadata["jgit"]["pathRepositoryFile"] = r"C:\Users\login\data\workspace\MLTool\datasets\jgit\repositoryFile"
-metadata["jgit"]["pathRepositoryMethod"] = r"C:\Users\login\data\workspace\MLTool\datasets\jgit\repositoryMethod"
-metadata["jgit"]["releaseIDs"] = [
+idsCommitRelease["jgit"] = [
     "1a6964c8274c50f0253db75f010d78ef0e739343",
 
     "b26ff6ebd623f7f3bf9b099ce10330d2964cc33b",
@@ -116,10 +50,7 @@ metadata["jgit"]["releaseIDs"] = [
 
 
 #   linuxtools
-metadata["linuxtools"] = {}
-metadata["linuxtools"]["pathRepositoryFile"] = r"C:\Users\login\data\workspace\MLTool\datasets\linuxtools\repositoryFile"
-metadata["linuxtools"]["pathRepositoryMethod"] = r"C:\Users\login\data\workspace\MLTool\datasets\linuxtools\repositoryMethod"
-metadata["linuxtools"]["releaseIDs"] = [
+idsCommitRelease["linuxtools"] = [
     "e3ea1e9cc32a55b79c2735f36a07c90975bec67d",
 
     "b1172eebee348db6cd979533f0d38a67725c7da8",
@@ -135,32 +66,8 @@ metadata["linuxtools"]["releaseIDs"] = [
 ]
 
 
-
-#   lucene-solr
-metadata["lucene-solr"] = {}
-metadata["lucene-solr"]["pathRepositoryFile"] = r"C:\Users\login\data\workspace\MLTool\datasets\lucene-solr\repositoryFile_"
-metadata["lucene-solr"]["pathRepositoryMethod"] = r"C:\Users\login\data\workspace\MLTool\datasets\lucene-solr\repositoryMethod_"
-metadata["lucene-solr"]["releaseIDs"] = [
-    "a0e7ee9d0d12370e8d2b5ae0a23b6e687e018d85",
-    
-    None,
-    "0e45934a35390eb2c370f2b6169f4bd23968d324",
-    "6dbb4c2facc86eee76c97e58398e3364ff39ceb7",
-    "30b22298bacb5238437864128bc9005d49d0d3ed",
-    "859fdefbceb3ffe088e5091fd695380e81a49c11",
-    "48c80f91b8e5cd9b3a9b48e6184bd53e7619e7e3",
-    "3ba304b29825a94249c5145b3f5061e87b87d8f8",
-    "2ae4746365c1ee72a0047ced7610b2096e438979",
-
-    "180058fe7897923d9eb150039a325faf0def3f61"
-]
-
-
 #   poi
-metadata["poi"] = {}
-metadata["poi"]["pathRepositoryFile"] =r"C:\Users\login\data\workspace\MLTool\datasets\poi\repositoryFile"
-metadata["poi"]["pathRepositoryMethod"] = r"C:\Users\login\data\workspace\MLTool\datasets\poi\repositoryMethod"
-metadata["poi"]["releaseIDs"] = [
+idsCommitRelease["poi"]= [
     "6c234ab6c8d9b392bc93f28edf13136b3c053894",
 
     None,
@@ -173,10 +80,7 @@ metadata["poi"]["releaseIDs"] = [
 
 
 # realm-java
-metadata["realm-java"] = {}
-metadata["realm-java"]["pathRepositoryFile"] = r"C:\Users\login\data\workspace\MLTool\datasets\realm-java\repositoryFile"
-metadata["realm-java"]["pathRepositoryMethod"] = r"C:\Users\login\data\workspace\MLTool\datasets\realm-java\repositoryMethod"
-metadata["realm-java"]["releaseIDs"] = [
+idsCommitRelease["realm-java"] = [
     "b03c621431fdc7e6e43566eeef505a32f5f6ce83"
 
     "eef492341a17351dc671b296bf7f1cd2c2ed32a4",
@@ -192,11 +96,8 @@ metadata["realm-java"]["releaseIDs"] = [
 
 
 # sonar-java
-metadata["sonar-java"] = {}
-metadata["sonar-java"]["pathRepositoryFile"] = r"C:\Users\login\data\workspace\MLTool\datasets\sonar-java\repositoryFile"
-metadata["sonar-java"]["pathRepositoryMethod"] = r"C:\Users\login\data\workspace\MLTool\datasets\sonar-java\repositoryMethod"
-metadata["sonar-java"]["releaseIDs"] = [
-    "",
+idsCommitRelease["sonar-java"]= [
+    "9140081865d82e930a0dd58db68c590880733be1",
 
     "5ac4cf695248bc7385cb3377216cd86340bda0b0",
     "fb4e10dcf17447ecea699934cdef0cf2009b1a52",
@@ -205,16 +106,12 @@ metadata["sonar-java"]["releaseIDs"] = [
     "fe9584c9f7812edc46f32d29440fc81b85a597a4",
     "931433c0510b161974d4844679f7bf3c73bb3e37",
 
-    ""
-
+    "bec6fc71cf44a9e84e711f9df693b466335185f4"
 ]
 
 
 #   wicket
-metadata["wicket"] = {}
-metadata["wicket"]["pathRepositoryFile"] = r"C:\Users\login\data\workspace\MLTool\datasets\wicket\repositoryFile"
-metadata["wicket"]["pathRepositoryMethod"] = r"C:\Users\login\data\workspace\MLTool\datasets\wicket\repositoryMethod"
-metadata["wicket"]["releaseIDs"] = [
+idsCommitRelease["wicket"] = [
     None,
 
     None,
@@ -284,18 +181,107 @@ def identifyCommit_rbr(releaseIndex):
         getCorrespondingCommit(testCommitID)
     ]
     records.append(train)
+def identifyCommit_cbc(commitHashes, releaseIndex, NumOfCommits):
+    commitIDsTest = [None, None, None]
+    commitIDsTest[1] = releaseIDs[releaseIndex]
+    if(commitHashes.index(commitIDsTest[1])-NumOfCommits*2<0):
+        return None
+    commitIDsTest[0] = commitHashes[commitHashes.index(commitIDsTest[1])-NumOfCommits]
+    commitIDsTest[2] = releaseIDs[len(releaseIDs)-1]
+    test  = [
+        "R"+str(releaseIndex)+"_c"+str(NumOfCommits) + "_test",
+        "method",
+        "metrics_isBuggy_hasBeenBuggy",
+        commitIDsTest[0],
+        commitIDsTest[1],
+        commitIDsTest[2],
+        getCorrespondingCommit(commitIDsTest[0]),
+        getCorrespondingCommit(commitIDsTest[1]),
+        getCorrespondingCommit(commitIDsTest[2]),
+    ]
+    records.append(test)
+    count = 0
+    while(0 < commitHashes.index(commitIDsTest[1])-NumOfCommits-NumOfCommits*count):
+        commitIDsTrain = [None, None, None]
+        commitIDsTrain[0] = commitHashes[commitHashes.index(commitIDsTest[1]) - NumOfCommits*2 -NumOfCommits*count]
+        commitIDsTrain[1] = commitHashes[commitHashes.index(commitIDsTest[1]) - NumOfCommits   -NumOfCommits*count]
+        commitIDsTrain[2] = commitIDsTest[1]
+        train = [
+            "R"+str(releaseIndex)+"_c"+str(NumOfCommits) + "_train_" + str(count),
+            "method",
+            "metrics_isBuggy_hasBeenBuggy",
+            commitIDsTrain[0],
+            commitIDsTrain[1],
+            commitIDsTrain[2],
+            getCorrespondingCommit(commitIDsTrain[0]),
+            getCorrespondingCommit(commitIDsTrain[1]),
+            getCorrespondingCommit(commitIDsTrain[2])
+        ]
+        records.append(train)
+        count+=1
+def identifyCommit_tbt(commits, releaseIndex, numOfMonths):
+    commitIDsTest = [None, None, None]
+    commitIDsTest[1] = releaseIDs[releaseIndex]
+    commitIDsTest[2] = releaseIDs[len(releaseIDs)-1]
+    testSince = commits[commitHashes.index(commitIDsTest[1])].committer_date - relativedelta(months = numOfMonths)
+    testUntil = commits[commitHashes.index(commitIDsTest[1])].committer_date
+    for commit in reversed(commits):
+        if(testSince<=commit.committer_date and commit.committer_date<=testUntil):
+            commitIDsTest[0] = commit.hash
+    test  = [
+        "R"+str(releaseIndex)+"_t"+str(numOfMonths) + "_test",
+        "method",
+        "metrics_isBuggy_hasBeenBuggy",
+        commitIDsTest[0],
+        commitIDsTest[1],
+        commitIDsTest[2],
+        getCorrespondingCommit(commitIDsTest[0]),
+        getCorrespondingCommit(commitIDsTest[1]),
+        getCorrespondingCommit(commitIDsTest[2])
+    ]
+    records.append(test)
+
+    count = 0
+    while(True):
+        commitIDsTrain = [None, None, None]
+        intervals = [
+            [commits[commitHashes.index(commitIDsTest[1])].committer_date - relativedelta(months = numOfMonths*3 + numOfMonths*count), commits[commitHashes.index(commitIDsTest[1])].committer_date - relativedelta(months = numOfMonths*2 + numOfMonths*count)],
+            [commits[commitHashes.index(commitIDsTest[1])].committer_date - relativedelta(months = numOfMonths*2 + numOfMonths*count), commits[commitHashes.index(commitIDsTest[1])].committer_date - relativedelta(months = numOfMonths*1 + numOfMonths*count)],
+        ]
+        for i in range(len(intervals)):
+            for commit in reversed(commits):
+                if(intervals[i][0] < commit.committer_date and commit.committer_date <= intervals[i][1]):
+                    commitIDsTrain[i] = commit.hash
+                    break
+        commitIDsTrain[2] = commitIDsTest[1]
+        if(commitIDsTrain[0]==None or commitIDsTrain[1]==None or commitIDsTrain[2]==None):
+            break
+        train = [
+            "R"+str(releaseIndex)+"_t"+str(numOfMonths) + "_train_" + str(count),
+            "method",
+            "metrics_isBuggy_hasBeenBuggy",
+            commitIDsTrain[0],
+            commitIDsTrain[1],
+            commitIDsTrain[2],
+            getCorrespondingCommit(commitIDsTrain[0]),
+            getCorrespondingCommit(commitIDsTrain[1]),
+            getCorrespondingCommit(commitIDsTrain[2])
+        ]
+        records.append(train)
+        count+=1
 
 pathRepositoryMethod = None
 pathRepositoryFile = None
 releaseIDs = None
 commitHashes = []
-def main(project):
+
+def main(nameProject, dirProject):
     global pathRepositoryMethod
     global pathRepositoryFile
     global releaseIDs
-    pathRepositoryMethod = metadata[project]["pathRepositoryMethod"]
-    pathRepositoryFile = metadata[project]["pathRepositoryFile"]
-    releaseIDs = metadata[project]["releaseIDs"]
+    pathRepositoryMethod = os.path.join(dirProject, "repositoryMethod")
+    pathRepositoryFile = os.path.join(dirProject, "repositoryFile")
+    releaseIDs = idsCommitRelease[nameProject]
 
     commits = []
     for commit in RepositoryMining(pathRepositoryFile, include_refs=True).traverse_commits():
@@ -312,7 +298,15 @@ def main(project):
             continue
         print("numRelease: "+ str(releaseIndex))
         identifyCommit_rbr(releaseIndex)
-    with open(project+'.csv', 'w') as f:
+        numOfCommitss = [500, 1000, 1500, 2000, 2500]
+        for i, numOfCommits in enumerate(numOfCommitss):
+            print("numOfCommits: "+ str(numOfCommits))
+            identifyCommit_cbc(commitHashes, releaseIndex, numOfCommits)
+        numOfMonthss = [1, 2, 3, 6, 12]
+        for i, numOfMonths in enumerate(numOfMonthss):
+            print("numOfMonths: "+ str(numOfMonths))
+            identifyCommit_tbt(commits, releaseIndex, numOfMonths)
+    with open(nameProject+'.csv', 'w') as f:
         writer = csv.writer(f, lineterminator="\n")
         writer.writerows(records)
 
@@ -320,8 +314,9 @@ def main(project):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="""Convert a git log output to json.
                                                  """)
-    parser.add_argument('--project', type=str)
+    parser.add_argument('--nameProject', type=str)
+    parser.add_argument('--dirProject', type=str)
 
     args = parser.parse_args()
-    project = args.project
-    main(project)
+
+    main(args.nameProject, args.dirProject)
