@@ -81,7 +81,7 @@ idsCommitRelease["poi"]= [
 
 # realm-java
 idsCommitRelease["realm-java"] = [
-    "b03c621431fdc7e6e43566eeef505a32f5f6ce83"
+    "b03c621431fdc7e6e43566eeef505a32f5f6ce83",
 
     "eef492341a17351dc671b296bf7f1cd2c2ed32a4",
     "1f19a05f820c1e43a9a0e38d8e32b0d96920df7f",
@@ -97,7 +97,7 @@ idsCommitRelease["realm-java"] = [
 
 # sonar-java
 idsCommitRelease["sonar-java"]= [
-    "9140081865d82e930a0dd58db68c590880733be1",
+    "5393bd3cc71e716dcd946232f5d43297d5889357",
 
     "5ac4cf695248bc7385cb3377216cd86340bda0b0",
     "fb4e10dcf17447ecea699934cdef0cf2009b1a52",
@@ -106,7 +106,7 @@ idsCommitRelease["sonar-java"]= [
     "fe9584c9f7812edc46f32d29440fc81b85a597a4",
     "931433c0510b161974d4844679f7bf3c73bb3e37",
 
-    "bec6fc71cf44a9e84e711f9df693b466335185f4"
+    "a4121b68b68740704a816ef7ad6636b61ab7ca55"
 ]
 
 
